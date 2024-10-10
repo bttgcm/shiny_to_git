@@ -1,0 +1,34 @@
+Tutorial:
+https://medium.com/@rami.krispin/deploy-shiny-app-on-github-pages-b4cbd433bdc
+
+Process:
+- prepare app.R file
+- deply the app with shinylive::export(appdir = "myapp", destdir = "docs")
+
+
+#################################
+output$downloadData <- downloadHandler(
+  filename = function() {
+    paste("calculation_result_", Sys.Date(), ".pdf", sep = "")
+  },
+  content = function(file) {
+    # Path to the external R Markdown file (replace with the correct file path)
+    reportFile <- "report_template.Rmd"
+
+    # Parameters to pass to the markdown document
+    params <- list(pH = input$pH, dry = input$dry, temp = input$temp, urea= input$urea,
+                   n_target = input$n_target, va_vol = input$va_vol,
+                   duration = result()$duration,
+                   application =  result()$application,
+                   land = result()$land
+                   )
+
+    # Copy the report file to a temporary location before rendering
+    tempReport <- file.path(tempdir(), "tempReport.Rmd")
+    file.copy(reportFile, tempReport, overwrite = TRUE)
+
+    # Render the PDF with the parameters
+    rmarkdown::render(tempReport, output_file = file, params = params, envir = new.env(parent = globalenv()))
+  }
+)
+}

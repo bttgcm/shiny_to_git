@@ -1,0 +1,43 @@
+---
+title: "SLU PROJECT TITLE"
+format: typst
+params:
+  pH: NA
+  dry: NA
+  temp: NA
+  urea: NA
+  n_target: NA
+  va_vol: NA
+  duration : NA
+  application: NA
+  land: NA
+---
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+
+## Input values
+
+You provided the following values:
+
+- **pH**: `r params$pH`
+- **Drymatter**: `r params$dry` $g/L$
+- **Temperature**: `r params$temp` C
+- **Applied Urea**: `r params$urea` $kg/m^3$
+
+Given the input data the following are calculated:
+
+### Duration of treatment: `r params$duration` days
+
+### Application rate: `r params$application`  $m^3/ha$
+
+### Land extension: `r params$land` $ha$
+
+## To Do:
+expand text, add logo and images. Add calculations
+
+
+
+---
+
+**Project information and links:**
+
+Project info | links | credits
